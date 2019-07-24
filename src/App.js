@@ -145,21 +145,3 @@ class App extends Component{
 }
 
 export default App;
-
-
-// if (response) {
-        //   fetch('http://localhost:3000/image', {
-        //     method: 'put',
-        //     headers: {'Content-Type': 'application/json'},
-        //     body: JSON.stringify({
-        //       id: this.state.user.id,
-        //       entries: this.state.user.entries
-        //     })
-        //   })
-        //   .then(response => response.json())
-        //   .then(count => {
-        //     this.setState({user: {
-        //         entries: count
-        //     }})
-        //   })
-        // }
