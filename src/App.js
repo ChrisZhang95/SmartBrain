@@ -5,7 +5,6 @@ import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
 import Particles from 'react-particles-js';
-import Clarifai from 'clarifai';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition.js'
 import Signin from './components/Signin/Signin';
 import Register from './components/Register/Register';
@@ -70,7 +69,7 @@ class App extends Component{
   }
 
   componentDidMount() {
-    fetch('http://localhost:3000')
+    fetch('https://rocky-hamlet-86347.herokuapp.com/')
       .then(response => response.json())
       .then(data => console.log(data))
   }
@@ -82,14 +81,18 @@ class App extends Component{
   onImageSubmit = () => {
     this.setState({imageURL: this.state.input});
 
-    // Instantiate a new Clarifai app by passing in your API key.
-    const app = new Clarifai.App({apiKey: '745d38fd78044a28a4238f385a797106'});
-
     // Predict the contents of an image by passing in a URL.
-    app.models.predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
+    fetch('https://rocky-hamlet-86347.herokuapp.com/imageurl', {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        input: this.state.input
+      })
+    })
+      .then(response => response.json())
       .then(response => {
         if (response) {
-          fetch('http://localhost:3000/image', {
+          fetch('https://rocky-hamlet-86347.herokuapp.com/image', {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
